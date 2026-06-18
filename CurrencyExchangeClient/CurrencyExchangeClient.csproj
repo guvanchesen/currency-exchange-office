@@ -56,12 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Connected Services\CurrencyService\CurrencyExchangeClient.CurrencyService.CompositeType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\CurrencyService\CurrencyExchangeService.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\CurrencyService\service.wsdl" />
     <None Include="Connected Services\CurrencyService\service.xsd">
       <SubType>Designer</SubType>
