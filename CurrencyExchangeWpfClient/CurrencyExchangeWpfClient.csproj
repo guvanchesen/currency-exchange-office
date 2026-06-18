@@ -104,6 +104,12 @@
     <None Include="Connected Services\CurrencyService\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\CurrencyService\CurrencyExchangeService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\CurrencyService\CurrencyExchangeWpfClient.CurrencyService.BalanceInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\CurrencyService\service.wsdl" />
     <None Include="Connected Services\CurrencyService\service.xsd">
       <SubType>Designer</SubType>

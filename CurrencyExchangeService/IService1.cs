@@ -24,9 +24,19 @@ namespace CurrencyExchangeService
         bool Login(string username, string password);
 
         [OperationContract]
-        double GetBalance(string username);
+        double GetBalance(string username, string currency);
 
         [OperationContract]
         double TopUp(string username, double amount);
+
+        [OperationContract]
+        BalanceInfo GetAllBalances(string username);
+
+        [OperationContract]
+        bool BuyCurrency(
+            string username,
+            double amount,
+            string fromCurrency,
+            string toCurrency);
     }
 }

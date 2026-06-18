@@ -18,7 +18,7 @@ namespace CurrencyExchangeWpfClient
             UserInfoTextBlock.Text = "Welcome " + currentUsername;
 
             LoadCurrencies();
-            RefreshBalance();
+            RefreshBalances();
         }
 
         private void LoadCurrencies()
@@ -34,8 +34,8 @@ namespace CurrencyExchangeWpfClient
                     ToComboBox.Items.Add(code);
                 }
 
-                FromComboBox.SelectedItem = "USD";
-                ToComboBox.SelectedItem = "EUR";
+                FromComboBox.SelectedItem = "PLN";
+                ToComboBox.SelectedItem = "USD";
             }
             catch (Exception ex)
             {
@@ -46,17 +46,31 @@ namespace CurrencyExchangeWpfClient
             }
         }
 
-        private void RefreshBalance()
+        private void RefreshBalances()
         {
             try
             {
-                double balance = serviceClient.GetBalance(currentUsername);
-                BalanceTextBlock.Text = "Balance: " + balance + " PLN";
+                BalanceInfo info = serviceClient.GetAllBalances(currentUsername);
+                string[] currencies = info.Currencies;
+                double[] amounts = info.Amounts;
+
+                BalancesListBox.Items.Clear();
+
+                if (currencies.Length == 0)
+                {
+                    BalancesListBox.Items.Add("(no balances yet)");
+                    return;
+                }
+
+                for (int i = 0; i < currencies.Length; i++)
+                {
+                    string line = currencies[i] + ":  " + amounts[i];
+                    BalancesListBox.Items.Add(line);
+                }
             }
             catch (Exception ex)
             {
-                BalanceTextBlock.Text = "Balance: (error)";
-                MessageBox.Show("Could not load balance: " + ex.Message,
+                MessageBox.Show("Could not load balances: " + ex.Message,
                                 "Error",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
@@ -81,7 +95,8 @@ namespace CurrencyExchangeWpfClient
             {
                 serviceClient.TopUp(currentUsername, amount);
                 TopUpAmountTextBox.Text = "";
-                RefreshBalance();
+                RefreshBalances();
+                StatusTextBlock.Text = "Topped up " + amount + " PLN.";
             }
             catch (Exception ex)
             {
@@ -92,14 +107,14 @@ namespace CurrencyExchangeWpfClient
             }
         }
 
-        private void ExchangeButton_Click(object sender, RoutedEventArgs e)
+        private void BuyButton_Click(object sender, RoutedEventArgs e)
         {
-            ResultTextBlock.Text = "";
+            StatusTextBlock.Text = "";
 
             double amount;
-            bool isValidNumber = double.TryParse(AmountTextBox.Text, out amount);
+            bool isValid = double.TryParse(AmountTextBox.Text, out amount);
 
-            if (!isValidNumber || amount <= 0)
+            if (!isValid || amount <= 0)
             {
                 MessageBox.Show("Please enter a valid positive amount.",
                                 "Invalid input",
@@ -121,19 +136,40 @@ namespace CurrencyExchangeWpfClient
             string fromCurrency = FromComboBox.SelectedItem.ToString();
             string toCurrency = ToComboBox.SelectedItem.ToString();
 
+            if (fromCurrency == toCurrency)
+            {
+                MessageBox.Show("Pick two different currencies.",
+                                "Invalid input",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+                return;
+            }
+
             try
             {
-                double result = serviceClient.ExchangeCurrency(
-                    amount, fromCurrency, toCurrency);
+                bool success = serviceClient.BuyCurrency(
+                    currentUsername, amount, fromCurrency, toCurrency);
 
-                ResultTextBlock.Text =
-                    amount + " " + fromCurrency +
-                    "  =  " +
-                    result + " " + toCurrency;
+                if (success)
+                {
+                    StatusTextBlock.Text =
+                        "Bought currency: spent " + amount + " " + fromCurrency
+                        + " for " + toCurrency + ".";
+                    AmountTextBox.Text = "";
+                    RefreshBalances();
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "Insufficient funds in " + fromCurrency + ".",
+                        "Transaction failed",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Exchange failed: " + ex.Message,
+                MessageBox.Show("Transaction failed: " + ex.Message,
                                 "Error",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);

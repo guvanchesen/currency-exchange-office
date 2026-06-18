@@ -5,6 +5,7 @@
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/CurrencyExchangeService" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IService1_GetData_InputMessage">
@@ -55,6 +56,18 @@
   <wsdl:message name="IService1_TopUp_OutputMessage">
     <wsdl:part name="parameters" element="tns:TopUpResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetAllBalances_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllBalances" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetAllBalances_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllBalancesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_BuyCurrency_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuyCurrency" />
+  </wsdl:message>
+  <wsdl:message name="IService1_BuyCurrency_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuyCurrencyResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetData" message="tns:IService1_GetData_InputMessage" />
@@ -87,6 +100,14 @@
     <wsdl:operation name="TopUp">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/TopUp" message="tns:IService1_TopUp_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/TopUpResponse" message="tns:IService1_TopUp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBalances">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAllBalances" message="tns:IService1_GetAllBalances_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAllBalancesResponse" message="tns:IService1_GetAllBalances_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuyCurrency">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/BuyCurrency" message="tns:IService1_BuyCurrency_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/BuyCurrencyResponse" message="tns:IService1_BuyCurrency_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -156,6 +177,24 @@
     </wsdl:operation>
     <wsdl:operation name="TopUp">
       <soap:operation soapAction="http://tempuri.org/IService1/TopUp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBalances">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetAllBalances" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuyCurrency">
+      <soap:operation soapAction="http://tempuri.org/IService1/BuyCurrency" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

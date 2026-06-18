@@ -26,6 +26,7 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="855d6ca5-6bed-4cec-9963-ff056a5f5971" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/CurrencyExchangeService/Service1/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="202a73e9-192d-4579-af5a-b1e8890d0088" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/CurrencyExchangeService/Service1/mex" />
     <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="2d622bc9-5503-44a8-8a0b-978828a343a1" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/CurrencyExchangeService/Service1/mex" />
+    <MetadataFile FileName="CurrencyExchangeService.xsd" MetadataType="Schema" ID="4df068a3-01b6-4e4a-8827-34453ff491db" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/CurrencyExchangeService/Service1/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

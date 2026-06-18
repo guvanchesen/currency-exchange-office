@@ -9,7 +9,70 @@
 //------------------------------------------------------------------------------
 
 namespace CurrencyExchangeWpfClient.CurrencyService {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BalanceInfo", Namespace="http://schemas.datacontract.org/2004/07/CurrencyExchangeService")]
+    [System.SerializableAttribute()]
+    public partial class BalanceInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double[] AmountsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string[] CurrenciesField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double[] Amounts {
+            get {
+                return this.AmountsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AmountsField, value) != true)) {
+                    this.AmountsField = value;
+                    this.RaisePropertyChanged("Amounts");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string[] Currencies {
+            get {
+                return this.CurrenciesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CurrenciesField, value) != true)) {
+                    this.CurrenciesField = value;
+                    this.RaisePropertyChanged("Currencies");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CurrencyService.IService1")]
@@ -52,16 +115,28 @@ namespace CurrencyExchangeWpfClient.CurrencyService {
         System.Threading.Tasks.Task<bool> LoginAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetBalance", ReplyAction="http://tempuri.org/IService1/GetBalanceResponse")]
-        double GetBalance(string username);
+        double GetBalance(string username, string currency);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetBalance", ReplyAction="http://tempuri.org/IService1/GetBalanceResponse")]
-        System.Threading.Tasks.Task<double> GetBalanceAsync(string username);
+        System.Threading.Tasks.Task<double> GetBalanceAsync(string username, string currency);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/TopUp", ReplyAction="http://tempuri.org/IService1/TopUpResponse")]
         double TopUp(string username, double amount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/TopUp", ReplyAction="http://tempuri.org/IService1/TopUpResponse")]
         System.Threading.Tasks.Task<double> TopUpAsync(string username, double amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllBalances", ReplyAction="http://tempuri.org/IService1/GetAllBalancesResponse")]
+        CurrencyExchangeWpfClient.CurrencyService.BalanceInfo GetAllBalances(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllBalances", ReplyAction="http://tempuri.org/IService1/GetAllBalancesResponse")]
+        System.Threading.Tasks.Task<CurrencyExchangeWpfClient.CurrencyService.BalanceInfo> GetAllBalancesAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/BuyCurrency", ReplyAction="http://tempuri.org/IService1/BuyCurrencyResponse")]
+        bool BuyCurrency(string username, double amount, string fromCurrency, string toCurrency);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/BuyCurrency", ReplyAction="http://tempuri.org/IService1/BuyCurrencyResponse")]
+        System.Threading.Tasks.Task<bool> BuyCurrencyAsync(string username, double amount, string fromCurrency, string toCurrency);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -139,12 +214,12 @@ namespace CurrencyExchangeWpfClient.CurrencyService {
             return base.Channel.LoginAsync(username, password);
         }
         
-        public double GetBalance(string username) {
-            return base.Channel.GetBalance(username);
+        public double GetBalance(string username, string currency) {
+            return base.Channel.GetBalance(username, currency);
         }
         
-        public System.Threading.Tasks.Task<double> GetBalanceAsync(string username) {
-            return base.Channel.GetBalanceAsync(username);
+        public System.Threading.Tasks.Task<double> GetBalanceAsync(string username, string currency) {
+            return base.Channel.GetBalanceAsync(username, currency);
         }
         
         public double TopUp(string username, double amount) {
@@ -153,6 +228,22 @@ namespace CurrencyExchangeWpfClient.CurrencyService {
         
         public System.Threading.Tasks.Task<double> TopUpAsync(string username, double amount) {
             return base.Channel.TopUpAsync(username, amount);
+        }
+        
+        public CurrencyExchangeWpfClient.CurrencyService.BalanceInfo GetAllBalances(string username) {
+            return base.Channel.GetAllBalances(username);
+        }
+        
+        public System.Threading.Tasks.Task<CurrencyExchangeWpfClient.CurrencyService.BalanceInfo> GetAllBalancesAsync(string username) {
+            return base.Channel.GetAllBalancesAsync(username);
+        }
+        
+        public bool BuyCurrency(string username, double amount, string fromCurrency, string toCurrency) {
+            return base.Channel.BuyCurrency(username, amount, fromCurrency, toCurrency);
+        }
+        
+        public System.Threading.Tasks.Task<bool> BuyCurrencyAsync(string username, double amount, string fromCurrency, string toCurrency) {
+            return base.Channel.BuyCurrencyAsync(username, amount, fromCurrency, toCurrency);
         }
     }
 }

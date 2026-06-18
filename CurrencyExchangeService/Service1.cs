@@ -11,15 +11,16 @@ namespace CurrencyExchangeService
         {
             return "You entered: " + value;
         }
+
         public double GetExchangeRate(string currencyCode)
         {
             if (currencyCode.ToUpper() == "PLN")
             {
                 return 1.0;
             }
+
             string url = "http://api.nbp.pl/api/exchangerates/rates/A/"
-                         + currencyCode
-                         + "/?format=json";
+                         + currencyCode + "/?format=json";
 
             try
             {
@@ -29,14 +30,13 @@ namespace CurrencyExchangeService
 
                 JObject parsedJson = JObject.Parse(jsonResponse);
                 double rate = (double)parsedJson["rates"][0]["mid"];
-
                 return rate;
             }
             catch (WebException)
             {
                 throw new Exception(
-                    "Could not fetch exchange rate for '" + currencyCode +
-                    "'. Check that the code is valid (e.g. USD, EUR, GBP).");
+                    "Could not fetch rate for '" + currencyCode +
+                    "'. Check the code is valid (e.g. USD, EUR, GBP).");
             }
         }
 
@@ -47,7 +47,8 @@ namespace CurrencyExchangeService
                 throw new Exception("Amount cannot be negative.");
             }
 
-            if (string.IsNullOrWhiteSpace(fromCurrency) || string.IsNullOrWhiteSpace(toCurrency))
+            if (string.IsNullOrWhiteSpace(fromCurrency)
+                || string.IsNullOrWhiteSpace(toCurrency))
             {
                 throw new Exception("Both currency codes must be provided.");
             }
@@ -81,14 +82,14 @@ namespace CurrencyExchangeService
                 }
 
                 codes.Add("PLN");
-
                 return codes.ToArray();
             }
             catch (WebException)
             {
-                throw new Exception("Could not fetch the list of currencies from NBP.");
+                throw new Exception("Could not fetch currency list from NBP.");
             }
         }
+
         public bool Register(string username, string password)
         {
             return UserStore.Register(username, password);
@@ -99,14 +100,57 @@ namespace CurrencyExchangeService
             return UserStore.Login(username, password);
         }
 
-        public double GetBalance(string username)
+        public double GetBalance(string username, string currency)
         {
-            return UserStore.GetBalance(username);
+            return UserStore.GetBalance(username, currency);
         }
 
         public double TopUp(string username, double amount)
         {
             return UserStore.TopUp(username, amount);
+        }
+
+        public BalanceInfo GetAllBalances(string username)
+        {
+            return UserStore.GetAllBalances(username);
+        }
+
+        public bool BuyCurrency(
+            string username,
+            double amount,
+            string fromCurrency,
+            string toCurrency)
+        {
+            if (amount <= 0)
+            {
+                throw new Exception("Amount must be greater than zero.");
+            }
+
+            if (string.IsNullOrWhiteSpace(fromCurrency)
+                || string.IsNullOrWhiteSpace(toCurrency))
+            {
+                throw new Exception("Both currencies must be specified.");
+            }
+
+            if (fromCurrency == toCurrency)
+            {
+                throw new Exception("Source and target currencies must differ.");
+            }
+
+            double fromRate = GetExchangeRate(fromCurrency);
+            double toRate = GetExchangeRate(toCurrency);
+
+            double amountInPln = amount * fromRate;
+            double convertedAmount = Math.Round(amountInPln / toRate, 2);
+
+            bool success = UserStore.ApplyExchange(
+                username,
+                fromCurrency,
+                amount,
+                toCurrency,
+                convertedAmount);
+
+            return success;
         }
     }
 }
