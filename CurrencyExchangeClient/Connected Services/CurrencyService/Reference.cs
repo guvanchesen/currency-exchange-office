@@ -26,6 +26,18 @@ namespace CurrencyExchangeClient.CurrencyService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetExchangeRate", ReplyAction="http://tempuri.org/IService1/GetExchangeRateResponse")]
         System.Threading.Tasks.Task<double> GetExchangeRateAsync(string currencyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ExchangeCurrency", ReplyAction="http://tempuri.org/IService1/ExchangeCurrencyResponse")]
+        double ExchangeCurrency(double amount, string fromCurrency, string toCurrency);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/ExchangeCurrency", ReplyAction="http://tempuri.org/IService1/ExchangeCurrencyResponse")]
+        System.Threading.Tasks.Task<double> ExchangeCurrencyAsync(double amount, string fromCurrency, string toCurrency);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAvailableCurrencies", ReplyAction="http://tempuri.org/IService1/GetAvailableCurrenciesResponse")]
+        string[] GetAvailableCurrencies();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAvailableCurrencies", ReplyAction="http://tempuri.org/IService1/GetAvailableCurrenciesResponse")]
+        System.Threading.Tasks.Task<string[]> GetAvailableCurrenciesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,6 +81,22 @@ namespace CurrencyExchangeClient.CurrencyService {
         
         public System.Threading.Tasks.Task<double> GetExchangeRateAsync(string currencyCode) {
             return base.Channel.GetExchangeRateAsync(currencyCode);
+        }
+        
+        public double ExchangeCurrency(double amount, string fromCurrency, string toCurrency) {
+            return base.Channel.ExchangeCurrency(amount, fromCurrency, toCurrency);
+        }
+        
+        public System.Threading.Tasks.Task<double> ExchangeCurrencyAsync(double amount, string fromCurrency, string toCurrency) {
+            return base.Channel.ExchangeCurrencyAsync(amount, fromCurrency, toCurrency);
+        }
+        
+        public string[] GetAvailableCurrencies() {
+            return base.Channel.GetAvailableCurrencies();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetAvailableCurrenciesAsync() {
+            return base.Channel.GetAvailableCurrenciesAsync();
         }
     }
 }

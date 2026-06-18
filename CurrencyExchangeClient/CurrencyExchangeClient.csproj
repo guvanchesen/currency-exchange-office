@@ -56,6 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Connected Services\CurrencyService\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\CurrencyService\service.wsdl" />
     <None Include="Connected Services\CurrencyService\service.xsd">
       <SubType>Designer</SubType>

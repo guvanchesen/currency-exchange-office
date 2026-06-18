@@ -10,5 +10,11 @@ namespace CurrencyExchangeService
 
         [OperationContract]
         double GetExchangeRate(string currencyCode);
+
+        [OperationContract]
+        double ExchangeCurrency(double amount, string fromCurrency,string toCurrency);
+
+        [OperationContract]
+        string[] GetAvailableCurrencies();
     }
 }

@@ -7,24 +7,32 @@ namespace CurrencyExchangeClient
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Currency Exchange Client starting...");
+            Console.WriteLine("=== Currency Exchange Client ===");
             Console.WriteLine();
+
             Service1Client client = new Service1Client();
 
             try
             {
-                Console.Write("Enter a currency code (e.g. USD, EUR, GBP): ");
-                string code = Console.ReadLine();
+                Console.Write("Amount to exchange: ");
+                double amount = double.Parse(Console.ReadLine());
 
-                double rate = client.GetExchangeRate(code);
+                Console.Write("From currency (e.g. USD): ");
+                string from = Console.ReadLine().ToUpper();
+
+                Console.Write("To currency (e.g. EUR): ");
+                string to = Console.ReadLine().ToUpper();
+
+                double result = client.ExchangeCurrency(amount, from, to);
 
                 Console.WriteLine();
-                Console.WriteLine("Current rate for " + code.ToUpper() + ": " + rate + " PLN");
+                Console.WriteLine(amount + " " + from + " = " + result + " " + to);
 
                 client.Close();
             }
             catch (Exception ex)
             {
+                Console.WriteLine();
                 Console.WriteLine("Error: " + ex.Message);
                 client.Abort();
             }
