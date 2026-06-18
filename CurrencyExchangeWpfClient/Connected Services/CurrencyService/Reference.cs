@@ -38,6 +38,30 @@ namespace CurrencyExchangeWpfClient.CurrencyService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAvailableCurrencies", ReplyAction="http://tempuri.org/IService1/GetAvailableCurrenciesResponse")]
         System.Threading.Tasks.Task<string[]> GetAvailableCurrenciesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Register", ReplyAction="http://tempuri.org/IService1/RegisterResponse")]
+        bool Register(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Register", ReplyAction="http://tempuri.org/IService1/RegisterResponse")]
+        System.Threading.Tasks.Task<bool> RegisterAsync(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Login", ReplyAction="http://tempuri.org/IService1/LoginResponse")]
+        bool Login(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Login", ReplyAction="http://tempuri.org/IService1/LoginResponse")]
+        System.Threading.Tasks.Task<bool> LoginAsync(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetBalance", ReplyAction="http://tempuri.org/IService1/GetBalanceResponse")]
+        double GetBalance(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetBalance", ReplyAction="http://tempuri.org/IService1/GetBalanceResponse")]
+        System.Threading.Tasks.Task<double> GetBalanceAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/TopUp", ReplyAction="http://tempuri.org/IService1/TopUpResponse")]
+        double TopUp(string username, double amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/TopUp", ReplyAction="http://tempuri.org/IService1/TopUpResponse")]
+        System.Threading.Tasks.Task<double> TopUpAsync(string username, double amount);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -97,6 +121,38 @@ namespace CurrencyExchangeWpfClient.CurrencyService {
         
         public System.Threading.Tasks.Task<string[]> GetAvailableCurrenciesAsync() {
             return base.Channel.GetAvailableCurrenciesAsync();
+        }
+        
+        public bool Register(string username, string password) {
+            return base.Channel.Register(username, password);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RegisterAsync(string username, string password) {
+            return base.Channel.RegisterAsync(username, password);
+        }
+        
+        public bool Login(string username, string password) {
+            return base.Channel.Login(username, password);
+        }
+        
+        public System.Threading.Tasks.Task<bool> LoginAsync(string username, string password) {
+            return base.Channel.LoginAsync(username, password);
+        }
+        
+        public double GetBalance(string username) {
+            return base.Channel.GetBalance(username);
+        }
+        
+        public System.Threading.Tasks.Task<double> GetBalanceAsync(string username) {
+            return base.Channel.GetBalanceAsync(username);
+        }
+        
+        public double TopUp(string username, double amount) {
+            return base.Channel.TopUp(username, amount);
+        }
+        
+        public System.Threading.Tasks.Task<double> TopUpAsync(string username, double amount) {
+            return base.Channel.TopUpAsync(username, amount);
         }
     }
 }

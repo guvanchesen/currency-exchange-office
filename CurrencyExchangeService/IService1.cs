@@ -16,5 +16,17 @@ namespace CurrencyExchangeService
 
         [OperationContract]
         string[] GetAvailableCurrencies();
+
+        [OperationContract]
+        bool Register(string username, string password);
+
+        [OperationContract]
+        bool Login(string username, string password);
+
+        [OperationContract]
+        double GetBalance(string username);
+
+        [OperationContract]
+        double TopUp(string username, double amount);
     }
 }

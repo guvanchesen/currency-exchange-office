@@ -89,5 +89,24 @@ namespace CurrencyExchangeService
                 throw new Exception("Could not fetch the list of currencies from NBP.");
             }
         }
+        public bool Register(string username, string password)
+        {
+            return UserStore.Register(username, password);
+        }
+
+        public bool Login(string username, string password)
+        {
+            return UserStore.Login(username, password);
+        }
+
+        public double GetBalance(string username)
+        {
+            return UserStore.GetBalance(username);
+        }
+
+        public double TopUp(string username, double amount)
+        {
+            return UserStore.TopUp(username, amount);
+        }
     }
 }

@@ -31,6 +31,30 @@
   <wsdl:message name="IService1_GetAvailableCurrencies_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAvailableCurrenciesResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_Register_InputMessage">
+    <wsdl:part name="parameters" element="tns:Register" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Register_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IService1_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetBalance_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBalance" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetBalance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_TopUp_InputMessage">
+    <wsdl:part name="parameters" element="tns:TopUp" />
+  </wsdl:message>
+  <wsdl:message name="IService1_TopUp_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TopUpResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetData" message="tns:IService1_GetData_InputMessage" />
@@ -47,6 +71,22 @@
     <wsdl:operation name="GetAvailableCurrencies">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetAvailableCurrencies" message="tns:IService1_GetAvailableCurrencies_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetAvailableCurrenciesResponse" message="tns:IService1_GetAvailableCurrencies_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Register">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Register" message="tns:IService1_Register_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/RegisterResponse" message="tns:IService1_Register_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/Login" message="tns:IService1_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/LoginResponse" message="tns:IService1_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBalance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetBalance" message="tns:IService1_GetBalance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetBalanceResponse" message="tns:IService1_GetBalance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TopUp">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/TopUp" message="tns:IService1_TopUp_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/TopUpResponse" message="tns:IService1_TopUp_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -80,6 +120,42 @@
     </wsdl:operation>
     <wsdl:operation name="GetAvailableCurrencies">
       <soap:operation soapAction="http://tempuri.org/IService1/GetAvailableCurrencies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Register">
+      <soap:operation soapAction="http://tempuri.org/IService1/Register" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/IService1/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBalance">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TopUp">
+      <soap:operation soapAction="http://tempuri.org/IService1/TopUp" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
