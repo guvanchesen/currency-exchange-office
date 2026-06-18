@@ -3,4 +3,7 @@
     <BuildDependency Project="CurrencyExchangeService/CurrencyExchangeService.csproj" />
   </Project>
   <Project Path="CurrencyExchangeService/CurrencyExchangeService.csproj" Id="1843cfbf-04ec-430d-8e63-9f606ccfc1fc" />
+  <Project Path="CurrencyExchangeWpfClient/CurrencyExchangeWpfClient.csproj" Id="7fe487a2-4fcc-4a86-ad4c-4a3dcbec5753">
+    <BuildDependency Project="CurrencyExchangeService/CurrencyExchangeService.csproj" />
+  </Project>
 </Solution>
